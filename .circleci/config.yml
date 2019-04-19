@@ -3,15 +3,16 @@ jobs:
   build:
     working_directory: /dockerapp
     docker:
-      - image: docker:17.05.0-ce-git
+      - image: docker:18.06.3-ce-git
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache py-pip=9.0.0-r1
-            pip install docker-compose==1.15.0
+            apk add --no-cache py-pip gcc musl-dev openssl-dev python2-dev libffi-dev make  make 
+            pip install ansible
+            pip install docker-compose==1.24.0
       - run:
           name: Run tests
           command: |
